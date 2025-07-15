@@ -16,6 +16,5 @@ export const AppDataSource = new DataSource({
       ? path.join(__dirname, '../entities/*.js')
       : path.join(__dirname, '../entities/*.ts'),
   ],
-  synchronize: !isProduction, // Disable synchronize in production
-  // logging: !isProduction,  // Optional: Disable logging in production
+  synchronize: true,
 });
