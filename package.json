@@ -1,0 +1,36 @@
+{
+  "name": "phantom_mask",
+  "version": "1.0.0",
+  "description": "You are tasked with building a backend service and a database for a pharmacy platform using the following two raw datasets:",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "dev": "nodemon src/server.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KE-CY/phantom_mask.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KE-CY/phantom_mask/issues"
+  },
+  "homepage": "https://github.com/KE-CY/phantom_mask#readme",
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "body-parser": "^2.2.0",
+    "express": "^5.1.0",
+    "nodemon": "^3.1.10",
+    "pg": "^8.16.3",
+    "pino": "^9.7.0",
+    "pino-pretty": "^13.0.0",
+    "typeorm": "^0.3.25"
+  }
+}
