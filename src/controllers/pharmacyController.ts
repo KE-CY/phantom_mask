@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from "express";
+import { PharmacyMaskService } from "../services/pharmacyMaskService";
 import { PharmacyService } from "../services/pharmacyService";
 import logger from "../utils/logger";
 import { ApiResponse } from "../utils/responseModel";
@@ -28,3 +29,25 @@ export const getList = async (
     next(error);
   }
 }
+
+export const getMasksByPharmacyId = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const pharmacyId = Number(req.params.id);
+    const { sortBy, sortOrder } = req.query;
+
+    const result = await PharmacyMaskService.getMasksByPharmacyId(
+      pharmacyId,
+      String(sortBy),
+      sortOrder as 'ASC' | 'DESC'
+    );
+
+    return res.json(new ApiResponse('success', 'OK', result));
+  } catch (err) {
+    logger.error({ msg: 'Error in getMasksByPharmacy', err });
+    next(err);
+  }
+};

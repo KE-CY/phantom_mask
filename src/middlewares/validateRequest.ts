@@ -1,7 +1,7 @@
+import { NextFunction, Request, Response } from "express";
 import Joi from "joi";
-import { Request, Response, NextFunction } from "express"
-import { ApiResponse } from "../utils/responseModel";
 import { ErrorCodes } from "../utils/errorCodes";
+import { ApiResponse } from "../utils/responseModel";
 
 export const validateBodyRequest = (schema: Joi.ObjectSchema) => {
   return (req: Request, res: Response, next: NextFunction) => {
@@ -42,7 +42,6 @@ export const validateRequestParams = (schema: Joi.ObjectSchema) => {
           )
         );
     }
-    req.params = value;
     next();
   };
 };
@@ -63,7 +62,6 @@ export const validateRequestQuery = (schema: Joi.ObjectSchema) => {
           )
         );
     }
-    req.params = value;
     next();
   };
 };
