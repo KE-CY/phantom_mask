@@ -16,7 +16,7 @@ export class PharmacyOpeningHour {
   @JoinColumn({ name: 'pharmacy_id' })
   pharmacy?: Pharmacy;
 
-  @Column({ type: 'int', name: 'day_Of_week' })
+  @Column({ type: 'int', name: 'day_of_week' })
   dayOfWeek!: number;
 
   @Column({ type: 'time', name: 'open_time' })

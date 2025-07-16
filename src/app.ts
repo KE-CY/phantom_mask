@@ -1,9 +1,11 @@
-import express from 'express';
 import bodyParser from 'body-parser';
+import express from 'express';
 import { AppDataSource } from './config/typeorm-config';
-
-import healthRoutes from './routes/healthRoute';
 import logger from './utils/logger';
+
+import { errorHandler } from './middlewares/errorHandler';
+import healthRoutes from './routes/healthRoute';
+import pharmacyRoutes from './routes/pharmacyRoute';
 
 const app = express();
 
@@ -22,5 +24,9 @@ app.use(bodyParser.json({ limit: '1tb' }));
 
 // Routes
 app.use('/health', healthRoutes);
+app.use('/pharmacies', pharmacyRoutes);
+
+// Error handling middleware
+app.use(errorHandler);
 
 export default app;
