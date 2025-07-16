@@ -24,10 +24,17 @@ Import [this](#api-document) json file to Postman.
 ### A.3. Import Data Commands
 Please run these two script commands to migrate the data into the database.
 
+#### Development Version (Using TypeScript Source)
 ```bash
-$ rake import_data:pharmacies[PATH_TO_FILE]
-$ rake import_data:users[PATH_TO_FILE]
+npm run seed-dev
 ```
+1. Executes `src/seed.ts` using `ts-node`
+
+#### Make sure the following files are present in the /data folder at the root of your project:
+1. data/pharmacies.json
+2. data/users.json
+
+
 ## B. Bonus Information
 
 >  If you completed the bonus requirements, please fill in your task below.
