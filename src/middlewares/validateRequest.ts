@@ -1,0 +1,64 @@
+import { NextFunction, Request, Response } from 'express';
+import Joi from 'joi';
+import { ErrorCodes } from '../utils/errorCodes';
+import { ApiResponse } from '../utils/responseModel';
+
+export class RequestValidator {
+  static validateBody(schema: Joi.ObjectSchema) {
+    return (req: Request, res: Response, next: NextFunction) => {
+      const { error, value } = schema.validate(req.body);
+
+      if (error) {
+        return res.status(400).json(
+          new ApiResponse(
+            'error',
+            error.details[0].message,
+            undefined,
+            ErrorCodes.BODY_REQUEST_VALIDATION_FAILED.code
+          )
+        );
+      }
+
+      req.body = value;
+      next();
+    };
+  }
+
+  static validateParams(schema: Joi.ObjectSchema) {
+    return (req: Request, res: Response, next: NextFunction) => {
+      const { error, value } = schema.validate(req.params);
+
+      if (error) {
+        return res.status(400).json(
+          new ApiResponse(
+            'error',
+            error.details[0].message,
+            undefined,
+            ErrorCodes.PATH_PARAM_REQUEST_VALIDATION_FAILED.code
+          )
+        );
+      }
+
+      next();
+    };
+  }
+
+  static validateQuery(schema: Joi.ObjectSchema) {
+    return (req: Request, res: Response, next: NextFunction) => {
+      const { error, value } = schema.validate(req.query);
+
+      if (error) {
+        return res.status(400).json(
+          new ApiResponse(
+            'error',
+            error.details[0].message,
+            undefined,
+            ErrorCodes.QUERY_REQUEST_VALIDATION_FAILED.code
+          )
+        );
+      }
+
+      next();
+    };
+  }
+}

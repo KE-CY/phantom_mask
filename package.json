@@ -23,12 +23,14 @@
   "homepage": "https://github.com/KE-CY/phantom_mask#readme",
   "devDependencies": {
     "@types/express": "^5.0.3",
+    "@types/joi": "^17.2.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
   },
   "dependencies": {
     "body-parser": "^2.2.0",
     "express": "^5.1.0",
+    "joi": "^17.13.3",
     "nodemon": "^3.1.10",
     "pg": "^8.16.3",
     "pino": "^9.7.0",
@@ -37,4 +39,3 @@
     "typeorm-erd": "^0.0.4"
   }
 }
-
