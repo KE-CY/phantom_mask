@@ -30,7 +30,7 @@ export class PharmacyController {
   static async getMasksByPharmacyId(req: Request, res: Response, next: NextFunction) {
     try {
       const pharmacyId = Number(req.params.id);
-      const { sortBy, sortOrder } = req.query;
+      const { sortBy = 'price', sortOrder } = req.query;
 
       const result = await PharmacyMaskService.getMasksByPharmacyId(
         pharmacyId,

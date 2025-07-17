@@ -11,7 +11,7 @@ export class PharmacyValidationSchema {
   });
 
   static readonly maskSortSchema = Joi.object({
-    sortOrder: Joi.string().valid('DESC', 'ASC'),
-    sortBy: Joi.string().valid('name', 'price'),
+    sortOrder: Joi.string().valid('DESC', 'ASC').default('ASC'),
+    sortBy: Joi.string().valid('name', 'price').default('price'),
   }).options({ stripUnknown: true });
 }
