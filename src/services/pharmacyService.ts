@@ -11,7 +11,7 @@ export class PharmacyService extends BasicMethod {
   static buildCondition(query: any): QueryCondition {
     let { condition, querySQL } = super.buildCondition(query);
 
-    const { id, dayOfWeek, time, maskCount, minPrice,  maskComparison, maxPrice, priceComparison } = query;
+    const { id, dayOfWeek, time, maskCount, minPrice, maskComparison, maxPrice, priceComparison, keyword } = query;
 
     // Initialization can only find active data 
     querySQL += ` AND ${this.entity}.isActive = true`;
@@ -67,6 +67,22 @@ export class PharmacyService extends BasicMethod {
         ) ${maskComparison === 'lt' ? '<' : '>'} :maskCount
       `;
       condition['maskCount'] = Number(maskCount);
+    }
+
+    if (keyword) {
+      querySQL += `
+          AND (
+            pharmacy.name ILIKE :keyword
+            OR EXISTS (
+              SELECT 1
+              FROM pharmacy_mask pm
+              INNER JOIN mask m ON m.id = pm.mask_id
+              WHERE pm.pharmacy_id = pharmacy.id
+                AND m.name ILIKE :keyword
+            )
+          )
+        `;
+      condition['keyword'] = `%${keyword}%`;
     }
 
 
