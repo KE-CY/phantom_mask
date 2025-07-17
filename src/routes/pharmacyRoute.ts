@@ -1,10 +1,10 @@
 import express from 'express';
-import { getList, getMasksByPharmacyId } from '../controllers/pharmacyController';
-import { maskSortValidation, pathParamByIdValidation, pharmacyValidation } from '../middlewares/pharmacyMiddlewares';
+import { PharmacyController } from '../controllers/pharmacyController';
+import { PharmacyValidation } from '../middlewares/pharmacyMiddlewares';
 
 const router = express.Router();
 
-router.get('/:id/masks', pathParamByIdValidation, maskSortValidation, getMasksByPharmacyId);
-router.get('/open', pharmacyValidation, getList);
+router.get('/:id/masks', PharmacyValidation.pathParamByIdValidation, PharmacyValidation.maskSortValidation, PharmacyController.getMasksByPharmacyId);
+router.get('/open', PharmacyValidation.pharmacyQueryValidation, PharmacyController.getList);
 
 export default router;

@@ -1,9 +1,10 @@
 
-import { idValidationSchema, maskSortSchema, openSchema } from '../validations/pharmacyValidation';
-import { validateRequestParams, validateRequestQuery } from './validateRequest';
+import { PharmacyValidationSchema } from '../validations/pharmacyValidation';
+import { RequestValidator } from './validateRequest';
+export class PharmacyValidation {
+  static pharmacyQueryValidation = RequestValidator.validateQuery(PharmacyValidationSchema.openSchema);
 
-export const pharmacyValidation = validateRequestQuery(openSchema);
+  static pathParamByIdValidation = RequestValidator.validateParams(PharmacyValidationSchema.idValidationSchema);
 
-export const pathParamByIdValidation = validateRequestParams(idValidationSchema);
-
-export const maskSortValidation = validateRequestQuery(maskSortSchema);
+  static maskSortValidation = RequestValidator.validateQuery(PharmacyValidationSchema.maskSortSchema);
+}

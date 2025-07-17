@@ -1,5 +1,8 @@
 import { Request, Response } from 'express';
+import { ApiResponse } from "../utils/responseModel";
 
-export const healthCheck = (req: Request, res: Response) => {
-  res.status(200).send('OK');
-};
+export class HealthController {
+  static healthCheck(req: Request, res: Response): void {
+    res.json(new ApiResponse('success', 'OK', { msg: 'Success Run.' }));
+  }
+}
