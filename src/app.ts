@@ -6,6 +6,7 @@ import logger from './utils/logger';
 import { errorHandler } from './middlewares/errorHandler';
 import healthRoutes from './routes/healthRoute';
 import pharmacyRoutes from './routes/pharmacyRoute';
+import userRoutes from './routes/userRoute';
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.use(bodyParser.json({ limit: '1tb' }));
 // Routes
 app.use('/health', healthRoutes);
 app.use('/pharmacies', pharmacyRoutes);
+app.use('/users', userRoutes);
 
 // Error handling middleware
 app.use(errorHandler);
