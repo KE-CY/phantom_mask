@@ -8,7 +8,7 @@ export abstract class BasicMethod {
     const condition: Record<string, any> = {};
 
     // init conditions
-    let querySQL = `1=1`;
+    let querySQL = '';
 
     if (startDate && endDate) {
       querySQL += ` AND ${this.entity}.createdAt BETWEEN :startDate AND :endDate`;

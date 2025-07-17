@@ -14,4 +14,12 @@ export class PharmacyValidationSchema {
     sortOrder: Joi.string().valid('DESC', 'ASC').default('ASC'),
     sortBy: Joi.string().valid('name', 'price').default('price'),
   }).options({ stripUnknown: true });
+
+  static readonly maskFilterSchema = Joi.object({
+    maskCount: Joi.number().min(0).required(),
+    maskComparison: Joi.string().valid('gt', 'lt').required(),
+    priceComparison: Joi.string().valid('gt', 'lt', 'between'),
+    minPrice: Joi.number().min(0),
+    maxPrice: Joi.number().min(0),
+  }).options({ stripUnknown: true });
 }

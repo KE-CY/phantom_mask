@@ -5,6 +5,7 @@ import logger from "../utils/logger";
 import { ApiResponse } from "../utils/responseModel";
 
 export class PharmacyController {
+  static entity = 'pharmacy';
   static async getList(req: Request, res: Response, next: NextFunction) {
     try {
       const filters = PharmacyService.buildTransformedFilters(req.query);
@@ -12,7 +13,7 @@ export class PharmacyController {
       const paginationQuery = {
         page: Number(req.query.page) || 1,
         limit: Number(req.query.limit) || 10,
-        sortBy: req.query.sortBy?.toString() || 'id',
+        sortBy: req.query.sortBy?.toString() || PharmacyController.entity + '.id',
         sortOrder: (req.query.sortOrder?.toString() as 'ASC' | 'DESC') || 'ASC',
         filters,
       };

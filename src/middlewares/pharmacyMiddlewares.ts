@@ -7,4 +7,6 @@ export class PharmacyValidation {
   static pathParamByIdValidation = RequestValidator.validateParams(PharmacyValidationSchema.idValidationSchema);
 
   static maskSortValidation = RequestValidator.validateQuery(PharmacyValidationSchema.maskSortSchema);
+
+  static maskFilterSchema = RequestValidator.validateQuery(PharmacyValidationSchema.maskFilterSchema);
 }

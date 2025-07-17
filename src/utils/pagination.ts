@@ -24,9 +24,9 @@ export const paginateAndSortAndFilter = async <T>(
   const sortOrder = paginationQuery.sortOrder || 'ASC';
   const filters = paginationQuery.filters || {};
 
-  Object.entries(filters).forEach(([key, value]) => {
-    query = query.where(key, value);
-  });
+  for (const [querySQL, condition] of Object.entries(filters)) {
+    query = query.andWhere(`1=1 ${querySQL}`, condition);
+  }
 
   const [result, total] = await Promise.all([
     query

@@ -11,7 +11,7 @@ export class PharmacyService extends BasicMethod {
   static buildCondition(query: any): QueryCondition {
     let { condition, querySQL } = super.buildCondition(query);
 
-    const { id, dayOfWeek, time } = query;
+    const { id, dayOfWeek, time, maskCount, minPrice,  maskComparison, maxPrice, priceComparison } = query;
 
     // Initialization can only find active data 
     querySQL += ` AND ${this.entity}.isActive = true`;
@@ -40,6 +40,35 @@ export class PharmacyService extends BasicMethod {
       condition['prevDayOfWeek'] = prevDayOfWeek;
       condition['time'] = time;
     }
+
+    // 依口罩數量 + 價格範圍
+    if (maskCount && priceComparison) {
+      querySQL += `
+        AND (
+          SELECT COUNT(pm.id)
+          FROM pharmacy_mask pm
+          WHERE pm.pharmacy_id = ${this.entity}.id
+      `;
+
+      // 加入價格範圍條件
+      if (priceComparison === 'gt' && minPrice != null) {
+        querySQL += ` AND pm.price > :minPrice `;
+        condition['minPrice'] = Number(minPrice);
+      } else if (priceComparison === 'lt' && maxPrice != null) {
+        querySQL += ` AND pm.price < :maxPrice `;
+        condition['maxPrice'] = Number(maxPrice);
+      } else if (priceComparison === 'between' && minPrice != null && maxPrice != null) {
+        querySQL += ` AND pm.price BETWEEN :minPrice AND :maxPrice `;
+        condition['minPrice'] = Number(minPrice);
+        condition['maxPrice'] = Number(maxPrice);
+      }
+
+      querySQL += `
+        ) ${maskComparison === 'lt' ? '<' : '>'} :maskCount
+      `;
+      condition['maskCount'] = Number(maskCount);
+    }
+
 
     return { condition, querySQL };
   }
