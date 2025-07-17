@@ -1,4 +1,4 @@
-import { pharmacyMaskRepository } from "../repositories/pharmacyMaskRepository";
+import { PharmacyMaskRepository } from "../repositories/pharmacyMaskRepository";
 import { QueryCondition } from "../types/queryCondition";
 import { BasicMethod } from "../utils/basicMethod";
 import logger from "../utils/logger";
@@ -37,19 +37,7 @@ export class PharmacyMaskService extends BasicMethod {
   static async getMasksByPharmacyId(pharmacyId: number, sortBy: string = 'price', sortOrder: 'ASC' | 'DESC' = 'ASC') {
     logger.info({ msg: 'In PharmacyMaskService.getMasksByPharmacyId', pharmacyId, sortBy, sortOrder });
 
-    const pharmacyMaskQueryBuilderRepository = pharmacyMaskRepository.createQueryBuilder('pharmacyMask');
-
-    const query = pharmacyMaskQueryBuilderRepository
-      .leftJoinAndSelect('pharmacyMask.mask', 'mask')
-      .where('pharmacyMask.pharmacy_id = :pharmacyId', { pharmacyId })
-      .select([
-        'mask.id AS id',
-        'mask.name AS name',
-        'pharmacyMask.price AS price',
-      ])
-      .orderBy(sortBy === 'price' ? 'pharmacyMask.price' : 'mask.name', sortOrder);
-
-    const result = await query.getRawMany();
+    const result = await PharmacyMaskRepository.getMasksByPharmacyId(pharmacyId, sortBy, sortOrder);
 
     return result;
   }

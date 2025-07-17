@@ -1,4 +1,4 @@
-import { purchaseHistoryRepository } from "../repositories/purchaseHistoryRepository";
+import { PurchaseHistoryRepository } from "../repositories/purchaseHistoryRepository";
 import { QueryCondition } from "../types/queryCondition";
 import { BasicMethod } from "../utils/basicMethod";
 
@@ -33,17 +33,16 @@ export class PurchaseHistoryService extends BasicMethod {
     const { querySQL, condition } = PurchaseHistoryService.buildCondition(query);
     const limit = parseInt(query.limit) || 10;
 
-    const qb = purchaseHistoryRepository
-      .createQueryBuilder('purchaseHistory')
-      .select('purchaseHistory.user_id', 'id')
-      .addSelect('SUM(purchaseHistory.transaction_amount)', 'totalAmount')
-      .innerJoin('purchaseHistory.user', 'user')
-      .addSelect('user.name', 'name')
-      .where(`1=1 ${querySQL}`, condition)
-      .groupBy('purchaseHistory.user_id, user.name')
-      .orderBy('SUM(purchaseHistory.transaction_amount)', 'DESC')
-      .limit(limit);
+    const buyers = await PurchaseHistoryRepository.getTopBuyers({ querySQL, condition }, limit);
 
-    return qb.getRawMany();
+    return buyers;
+  }
+
+  static async getTransactionSummary(query: any) {
+    const { querySQL, condition } = PurchaseHistoryService.buildCondition(query);
+
+    const transactionSummary = await PurchaseHistoryRepository.getTransactionSummary({ querySQL, condition });
+
+    return transactionSummary;
   }
 }
