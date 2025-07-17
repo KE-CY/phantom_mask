@@ -9,7 +9,7 @@
 - [x] List all pharmacies with more or less than x mask products within a price range.
   - Implemented at xxx API.
 - [x] The top x users by total transaction amount of masks within a date range.
-  - Implemented at xxx API.
+  - Implemented at `{GET} /users/top-mask-buyers` API.
 - [x] The total number of masks and dollar value of transactions within a date range.
   - Implemented at xxx API.
 - [x] Search for pharmacies or masks by name, ranked by relevance to the search term.
