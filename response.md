@@ -7,7 +7,7 @@
 - [x] List all masks sold by a given pharmacy, sorted by mask name or price.
   - Implemented at `{GET} /pharmacies/:id/masks` API.
 - [x] List all pharmacies with more or less than x mask products within a price range.
-  - Implemented at xxx API.
+  - Implemented at `{GET} /pharmacies/mask-filter` API.
 - [x] The top x users by total transaction amount of masks within a date range.
   - Implemented at `{GET} /users/top-mask-buyers` API.
 - [x] The total number of masks and dollar value of transactions within a date range.
