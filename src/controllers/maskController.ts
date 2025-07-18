@@ -37,4 +37,14 @@ export class MaskController {
       next(error);
     }
   }
+
+  static async purchaseMasks(req: Request, res: Response, next: NextFunction) {
+    try {
+      const result = await PurchaseHistoryService.processPurchase(req.body);
+      res.json(new ApiResponse('success', 'OK', result));
+    } catch (error) {
+      logger.error({ msg: 'Error in purchaseMasks', error });
+      next(error);
+    }
+  }
 }
