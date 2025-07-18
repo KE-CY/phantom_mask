@@ -77,6 +77,6 @@ My ERD [[erd-link]](https://dbdiagram.io/d/Phantom-Mask-6879f5c5f413ba35088189d5
 
 ### C.2. Technical Document
 
-For frontend programmer reading, please check this [technical document](technical-document) to know how to operate those APIs.
+For frontend programmer reading, please check this [technical document](https://www.postman.com/side-project-2577/workspace/public-side-project/collection/25585578-cc971561-0f7a-4dea-927b-9a06ccb83cfd?action=share&creator=25585578) to know how to operate those APIs.
 
 - --
