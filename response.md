@@ -30,6 +30,12 @@ npm run seed-dev
 ```
 1. Executes `src/seed.ts` using `ts-node`
 
+#### Development Version (Using JavaScript Source)
+```bash
+npm run seed
+```
+1. Executes `dist/seed.ts` using `node`
+
 #### Make sure the following files are present in the /data folder at the root of your project:
 1. data/pharmacies.json
 2. data/users.json
@@ -40,32 +46,28 @@ npm run seed-dev
 >  If you completed the bonus requirements, please fill in your task below.
 ### B.1. Test Coverage Report
 
-I wrote down the 20 unit tests for the APIs I built. Please check the test coverage report at [here](#test-coverage-report).
-
-You can run the test script by using the command below:
-
-```bash
-bundle exec rspec spec
-```
+Not done.
 
 ### B.2. Dockerized
-Please check my Dockerfile / docker-compose.yml at [here](#dockerized).
+Please check my Dockerfile / docker-compose.yml.
 
 On the local machine, please follow the commands below to build it.
 
 ```bash
-$ docker build --build-arg ENV=development -p 80:3000 -t my-project:1.0.0 .  
+# Step 1: Build the Docker image
+$ docker-compose build
+
+# Step 2: Start all containers (backend and PostgreSQL)
 $ docker-compose up -d
 
-# go inside the container, run the migrate data command.
-$ docker exec -it my-project bash
-$ rake import_data:pharmacies[PATH_TO_FILE] 
-$ rake import_data:user[PATH_TO_FILE]
+# Step 3: Run the seed script inside the container to import data
+$ docker-compose exec backend node dist/seed.js
 ```
+The seed script will read JSON files (e.g. pharmacies.json, users.json) located under the data/ directory, and insert them into the PostgreSQL database.
 
 ### B.3. Demo Site Url
 
-The demo site is ready on [my AWS demo site](#demo-site-url); you can try any APIs on this demo site.
+Not done.
 
 ## C. Other Information
 
