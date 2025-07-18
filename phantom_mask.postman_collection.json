@@ -1,0 +1,892 @@
+{
+	"info": {
+		"_postman_id": "cc971561-0f7a-4dea-927b-9a06ccb83cfd",
+		"name": "phantom_mask",
+		"description": "### 成功回傳的格式\n\n所有 API 回應都遵循一致的格式：\n\n``` json\n{\n  \"status\": \"success\",\n  \"message\": \"Descriptive message here\",\n  \"data\": { ... }\n}\n\n ```\n\n### 錯誤回傳的格式\n\n所有 API 回應都遵循一致的格式：\n\n``` json\n{\n  \"status\": \"error\",\n  \"message\": \"Error message\",\n}\n\n ```",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25585578",
+		"_collection_link": "https://www.postman.com/side-project-2577/workspace/public-side-project/collection/25585578-cc971561-0f7a-4dea-927b-9a06ccb83cfd?action=share&source=collection_link&creator=25585578"
+	},
+	"item": [
+		{
+			"name": "Pharmacy",
+			"item": [
+				{
+					"name": "Get Pharmacy Open List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/pharmacies/open?dayOfWeek=1&time=23:00",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"pharmacies",
+								"open"
+							],
+							"query": [
+								{
+									"key": "dayOfWeek",
+									"value": "1"
+								},
+								{
+									"key": "time",
+									"value": "23:00"
+								}
+							]
+						},
+						"description": "## 列出營業中的藥局\n\n### Endpoint\n\n`GET /pharmacies/open`\n\n### 描述\n\n列出存在的的藥局，可搭配分頁、排序與篩選條件。\n\n### Query 參數\n\n| 參數名稱 | 型別 | 範例 | 是否必填 | 描述 |\n| --- | --- | --- | --- | --- |\n| `dayOfWeek` | number | `5` | 是 | 星期幾（0 = 星期日，6 = 星期六） |\n| `time` | string | `01:00` | 是 | 時間（格式為 HH:mm） |\n| `page` | number | `1` | 否 | 頁碼，預設 1 |\n| `limit` | number | `10` | 否 | 每頁筆數，預設 10 |\n| `sortBy` | string | `id` | 否 | 排序欄位 |\n| `sortOrder` | string | `ASC` or `DESC` | 否 | 排序方式 |"
+					},
+					"response": [
+						{
+							"name": "success response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{local}}/pharmacies?dayOfWeek=2&time=01:00&limit=40",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"pharmacies"
+									],
+									"query": [
+										{
+											"key": "dayOfWeek",
+											"value": "2"
+										},
+										{
+											"key": "time",
+											"value": "01:00"
+										},
+										{
+											"key": "limit",
+											"value": "40"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "540"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"21c-ONu0PXE9dTnBQYBV6/QErRiCDVo\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 16 Jul 2025 10:18:36 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"success\",\n    \"message\": \"OK\",\n    \"data\": {\n        \"data\": [\n            {\n                \"id\": 16,\n                \"name\": \"RX Universal\",\n                \"cashBalance\": \"244.03\",\n                \"isActive\": true,\n                \"createdAt\": \"2025-07-16T00:11:00.280Z\",\n                \"updatedAt\": \"2025-07-16T00:11:00.280Z\"\n            },\n            {\n                \"id\": 17,\n                \"name\": \"Health Element\",\n                \"cashBalance\": \"789.85\",\n                \"isActive\": true,\n                \"createdAt\": \"2025-07-16T00:11:00.280Z\",\n                \"updatedAt\": \"2025-07-16T00:11:00.280Z\"\n            },\n            {\n                \"id\": 19,\n                \"name\": \"Acculife Drug Stores\",\n                \"cashBalance\": \"828.50\",\n                \"isActive\": true,\n                \"createdAt\": \"2025-07-16T00:11:00.280Z\",\n                \"updatedAt\": \"2025-07-16T00:11:00.280Z\"\n            }\n        ],\n        \"page\": 1,\n        \"limit\": 40,\n        \"total\": 3\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get masks by pharmacy Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/pharmacies/:id/masks?sortBy=price&sortOrder=ASC",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"pharmacies",
+								":id",
+								"masks"
+							],
+							"query": [
+								{
+									"key": "sortBy",
+									"value": "price"
+								},
+								{
+									"key": "sortOrder",
+									"value": "ASC"
+								}
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						},
+						"description": "## 列出指定藥局販售的所有口罩\n\n### Endpoint\n\n`GET /pharmacies/:id/masks`\n\n### 描述\n\n取得某間藥局販售的所有口罩清單，並支援依「口罩名稱」或「價格」進行排序。\n\n### Path 參數\n\n| 參數名稱 | 型別 | 範例 | 是否必填 | 描述 |\n| --- | --- | --- | --- | --- |\n| `id` | string | `1` | 是 | 藥局 ID |\n\n### Query 參數\n\n| 參數名稱 | 型別 | 範例 | 是否必填 | 描述 |\n| --- | --- | --- | --- | --- |\n| `sortBy` | string | `price` | 否 | 排序欄位：maskName 或 price， 預設是 price |\n| `sortOrder` | string | `ASC` | 否 | 排序方式：ASC 或 DESC，預設是 ASC |"
+					},
+					"response": [
+						{
+							"name": "success response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{local}}/pharmacies/:id/masks?sortBy=price&sortOrder=ASC",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"pharmacies",
+										":id",
+										"masks"
+									],
+									"query": [
+										{
+											"key": "sortBy",
+											"value": "price"
+										},
+										{
+											"key": "sortOrder",
+											"value": "ASC"
+										}
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "375"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"177-Hxfps1YViBBAbzbIznw4R+njkNw\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 16 Jul 2025 15:10:28 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"success\",\n    \"message\": \"OK\",\n    \"data\": [\n        {\n            \"id\": 4,\n            \"name\": \"Second Smile (black) (3 per pack)\",\n            \"price\": \"5.84\"\n        },\n        {\n            \"id\": 5,\n            \"name\": \"Masquerade (green) (3 per pack)\",\n            \"price\": \"9.40\"\n        },\n        {\n            \"id\": 1,\n            \"name\": \"True Barrier (green) (3 per pack)\",\n            \"price\": \"13.70\"\n        },\n        {\n            \"id\": 3,\n            \"name\": \"Second Smile (black) (10 per pack)\",\n            \"price\": \"31.98\"\n        },\n        {\n            \"id\": 2,\n            \"name\": \"MaskT (green) (10 per pack)\",\n            \"price\": \"41.86\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Pharmacy By Mask filter",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/pharmacies/mask-filter?maskCount=2&maskComparison=gt&minPrice=1&maxPrice=10&priceComparison=between",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"pharmacies",
+								"mask-filter"
+							],
+							"query": [
+								{
+									"key": "maskCount",
+									"value": "2"
+								},
+								{
+									"key": "maskComparison",
+									"value": "gt"
+								},
+								{
+									"key": "minPrice",
+									"value": "1"
+								},
+								{
+									"key": "maxPrice",
+									"value": "10"
+								},
+								{
+									"key": "priceComparison",
+									"value": "between"
+								}
+							]
+						},
+						"description": "## 依口罩數量與價格篩選藥局列表\n\n### Endpoint\n\n`GET /pharmacies`\n\n### 描述\n\n依據口罩種類數量與價格範圍篩選藥局列表。可搜尋符合特定價格區間內的口罩種類數量條件的藥局。可搭配分頁、排序與篩選條件。\n\n### Query 參數\n\n| 參數名稱 | 型別 | 範例 | 是否必填 | 描述 |\n| --- | --- | --- | --- | --- |\n| `maskCount` | number | `1` | 是 | 口罩種類數量 |\n| `maskComparison` | string | `lt` | 是 | lt（小於）、gt（大於） |\n| `priceComparison` | string | `between` | 是 | gt（大於）、lt（小於）、between（區間內） |\n| `minPrice` | number | `1` | 條件必填 | 最低價格（當 priceComparison 為 gt 或 between 時必填） |\n| `maxPrice` | number | `10` | 條件必填 | 最高價格（當 priceComparison 為 lt 或 between 時必填） |\n| `page` | number | `1` | 否 | 頁碼，預設 1 |\n| `limit` | number | `10` | 否 | 每頁筆數，預設 10 |\n| `sortBy` | string | `id` | 否 | 排序欄位 |\n| `sortOrder` | string | `ASC` or `DESC` | 否 | 排序方式 |"
+					},
+					"response": [
+						{
+							"name": "success response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{local}}/pharmacies/mask-filter?maskCount=2&maskComparison=gt&minPrice=1&maxPrice=10&priceComparison=between",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"pharmacies",
+										"mask-filter"
+									],
+									"query": [
+										{
+											"key": "maskCount",
+											"value": "2"
+										},
+										{
+											"key": "maskComparison",
+											"value": "gt"
+										},
+										{
+											"key": "minPrice",
+											"value": "1"
+										},
+										{
+											"key": "maxPrice",
+											"value": "10"
+										},
+										{
+											"key": "priceComparison",
+											"value": "between"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "374"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"176-kkvVVsfXzjgguLhW4LBrMQEqGQI\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 18 Jul 2025 17:34:25 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"success\",\n    \"message\": \"OK\",\n    \"data\": {\n        \"data\": [\n            {\n                \"id\": 9,\n                \"name\": \"Centrico\",\n                \"cashBalance\": \"277.94\",\n                \"isActive\": true,\n                \"createdAt\": \"2025-07-16T00:11:00.280Z\",\n                \"updatedAt\": \"2025-07-16T00:11:00.280Z\"\n            },\n            {\n                \"id\": 15,\n                \"name\": \"HealthMart\",\n                \"cashBalance\": \"288.14\",\n                \"isActive\": true,\n                \"createdAt\": \"2025-07-16T00:11:00.280Z\",\n                \"updatedAt\": \"2025-07-16T00:11:00.280Z\"\n            }\n        ],\n        \"page\": 1,\n        \"limit\": 10,\n        \"total\": 2\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Pharmacy List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/pharmacies?keyword=Second Smile (black) ",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"pharmacies"
+							],
+							"query": [
+								{
+									"key": "keyword",
+									"value": "Second Smile (black) "
+								}
+							]
+						},
+						"description": "## 列出藥局列表\n\n### Endpoint\n\n`GET /pharmacies`\n\n### 描述\n\n列出藥局列表，可搭配分頁、排序與篩選條件。\n\n### Query 參數\n\n| 參數名稱 | 型別 | 範例 | 是否必填 | 描述 |\n| --- | --- | --- | --- | --- |\n| `keyword` | string | `DFW Wellness` | 否 | 關鍵字搜尋（藥店名稱、口罩名稱） |\n| `page` | number | `1` | 否 | 頁碼，預設 1 |\n| `limit` | number | `10` | 否 | 每頁筆數，預設 10 |\n| `sortBy` | string | `id` | 否 | 排序欄位 |\n| `sortOrder` | string | `ASC` or `DESC` | 否 | 排序方式 |"
+					},
+					"response": [
+						{
+							"name": "success response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{local}}/pharmacies?keyword=Second Smile (black) ",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"pharmacies"
+									],
+									"query": [
+										{
+											"key": "keyword",
+											"value": "Second Smile (black) "
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "829"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"33d-xrl07Vjl6MEirCNFVfYs785kAJU\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 17 Jul 2025 17:38:03 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"success\",\n    \"message\": \"OK\",\n    \"data\": {\n        \"data\": [\n            {\n                \"id\": 1,\n                \"name\": \"DFW Wellness\",\n                \"cashBalance\": \"328.41\",\n                \"isActive\": true,\n                \"createdAt\": \"2025-07-16T00:11:00.280Z\",\n                \"updatedAt\": \"2025-07-16T00:11:00.280Z\"\n            },\n            {\n                \"id\": 3,\n                \"name\": \"First Care Rx\",\n                \"cashBalance\": \"222.52\",\n                \"isActive\": true,\n                \"createdAt\": \"2025-07-16T00:11:00.280Z\",\n                \"updatedAt\": \"2025-07-16T00:11:00.280Z\"\n            },\n            {\n                \"id\": 11,\n                \"name\": \"Medlife\",\n                \"cashBalance\": \"276.31\",\n                \"isActive\": true,\n                \"createdAt\": \"2025-07-16T00:11:00.280Z\",\n                \"updatedAt\": \"2025-07-16T00:11:00.280Z\"\n            },\n            {\n                \"id\": 18,\n                \"name\": \"Blink Health\",\n                \"cashBalance\": \"271.83\",\n                \"isActive\": true,\n                \"createdAt\": \"2025-07-16T00:11:00.280Z\",\n                \"updatedAt\": \"2025-07-16T00:11:00.280Z\"\n            },\n            {\n                \"id\": 20,\n                \"name\": \"Cool Pharmacy Names\",\n                \"cashBalance\": \"623.47\",\n                \"isActive\": true,\n                \"createdAt\": \"2025-07-16T00:11:00.280Z\",\n                \"updatedAt\": \"2025-07-16T00:11:00.280Z\"\n            }\n        ],\n        \"page\": 1,\n        \"limit\": 10,\n        \"total\": 5\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Get Top Mask Buyers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/users/top-mask-buyers?transactionStartDate=2021-01-01&transactionEndDate=2021-01-29",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"users",
+								"top-mask-buyers"
+							],
+							"query": [
+								{
+									"key": "transactionStartDate",
+									"value": "2021-01-01"
+								},
+								{
+									"key": "transactionEndDate",
+									"value": "2021-01-29"
+								},
+								{
+									"key": "limit",
+									"value": "2",
+									"disabled": true
+								}
+							]
+						},
+						"description": "## 查詢購買口罩總金額前 X 名的使用者\n\n### Endpoint\n\n`GET /users/top-mask-buyers`\n\n### 描述\n\n取得在特定日期區間內，購買口罩金額最高的前幾名使用者。\n\n### Query 參數\n\n| 參數名稱 | 型別 | 範例 | 是否必填 | 描述 |\n| --- | --- | --- | --- | --- |\n| `transactionStartDate` | string | `2024-01-01` | 是 | 起始交易日期（格式：YYYY-MM-DD） |\n| `transactionEndDate` | string | `2024-01-01` | 是 | 結束交易日期（格式：YYYY-MM-DD） |\n| `limit` | number | `1` | 否 | 回傳前幾名使用者，預設為 10，最小接收到 0 元 |"
+					},
+					"response": [
+						{
+							"name": "success response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{local}}/users/top-mask-buyers?transactionStartDate=2021-01-01&transactionEndDate=2021-01-29&limit=2",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"users",
+										"top-mask-buyers"
+									],
+									"query": [
+										{
+											"key": "transactionStartDate",
+											"value": "2021-01-01"
+										},
+										{
+											"key": "transactionEndDate",
+											"value": "2021-01-29"
+										},
+										{
+											"key": "limit",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "156"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"9c-OQb9hFYzyJR1Yn6KIwxfAENXJlE\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 17 Jul 2025 16:22:19 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"success\",\n    \"message\": \"OK\",\n    \"data\": [\n        {\n            \"name\": \"Timothy Schultz\",\n            \"id\": 8,\n            \"totalAmount\": \"172.28\"\n        },\n        {\n            \"name\": \"Lester Arnold\",\n            \"id\": 4,\n            \"totalAmount\": \"158.20\"\n        }\n    ]\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Mask",
+			"item": [
+				{
+					"name": "Get masks transactions summary",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/masks/transactions/summary?transactionStartDate=2021-01-01&transactionEndDate=2021-01-31",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"masks",
+								"transactions",
+								"summary"
+							],
+							"query": [
+								{
+									"key": "transactionStartDate",
+									"value": "2021-01-01"
+								},
+								{
+									"key": "transactionEndDate",
+									"value": "2021-01-31"
+								}
+							]
+						},
+						"description": "## 計算在指定日期範圍內的所有口罩交易筆數與總交易金額。\n\n### Endpoint\n\n`GET /masks/transactions/summary`\n\n### 描述\n\n取得在特定日期區間內，計算口罩交易筆數與總交易金額。\n\n### Query 參數\n\n| 參數名稱 | 型別 | 範例 | 是否必填 | 描述 |\n| --- | --- | --- | --- | --- |\n| `transactionStartDate` | string | `2024-01-01` | 是 | 起始交易日期（格式：YYYY-MM-DD） |\n| `transactionEndDate` | string | `2024-01-01` | 是 | 結束交易日期（格式：YYYY-MM-DD） |"
+					},
+					"response": [
+						{
+							"name": "success response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{local}}/masks/transactions/summary?transactionStartDate=2021-01-01&transactionEndDate=2021-01-31",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"masks",
+										"transactions",
+										"summary"
+									],
+									"query": [
+										{
+											"key": "transactionStartDate",
+											"value": "2021-01-01"
+										},
+										{
+											"key": "transactionEndDate",
+											"value": "2021-01-31"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "86"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"56-IGxa7VRDF2CnWnd8kZ7XsovFm+Y\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 17 Jul 2025 16:52:25 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"success\",\n    \"message\": \"OK\",\n    \"data\": {\n        \"maskCount\": \"100\",\n        \"totalAmount\": \"1849.52\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Mask List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/masks?keyword=DFW Wellness",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"masks"
+							],
+							"query": [
+								{
+									"key": "keyword",
+									"value": "DFW Wellness"
+								}
+							]
+						},
+						"description": "## 列出口罩列表\n\n### Endpoint\n\n`GET /masks`\n\n### 描述\n\n列出口罩列表，可搭配分頁、排序與篩選條件。\n\n### Query 參數\n\n| 參數名稱 | 型別 | 範例 | 是否必填 | 描述 |\n| --- | --- | --- | --- | --- |\n| `keyword` | string | `DFW Wellness` | 否 | 關鍵字搜尋（藥店名稱、口罩名稱） |\n| `page` | number | `1` | 否 | 頁碼，預設 1 |\n| `limit` | number | `10` | 否 | 每頁筆數，預設 10 |\n| `sortBy` | string | `id` | 否 | 排序欄位 |\n| `sortOrder` | string | `ASC` or `DESC` | 否 | 排序方式 |"
+					},
+					"response": [
+						{
+							"name": "success response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{local}}/masks?keyword=DFW Wellness",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"masks"
+									],
+									"query": [
+										{
+											"key": "keyword",
+											"value": "DFW Wellness"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "806"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"326-BzIzRYFIGB0YtvQ0UE85r6U4gss\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 17 Jul 2025 17:59:50 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"success\",\n    \"message\": \"OK\",\n    \"data\": {\n        \"data\": [\n            {\n                \"id\": 1,\n                \"name\": \"True Barrier (green) (3 per pack)\",\n                \"isActive\": true,\n                \"createdAt\": \"2025-07-16T00:11:00.280Z\",\n                \"updatedAt\": \"2025-07-16T00:11:00.280Z\"\n            },\n            {\n                \"id\": 2,\n                \"name\": \"MaskT (green) (10 per pack)\",\n                \"isActive\": true,\n                \"createdAt\": \"2025-07-16T00:11:00.280Z\",\n                \"updatedAt\": \"2025-07-16T00:11:00.280Z\"\n            },\n            {\n                \"id\": 3,\n                \"name\": \"Second Smile (black) (10 per pack)\",\n                \"isActive\": true,\n                \"createdAt\": \"2025-07-16T00:11:00.280Z\",\n                \"updatedAt\": \"2025-07-16T00:11:00.280Z\"\n            },\n            {\n                \"id\": 4,\n                \"name\": \"Second Smile (black) (3 per pack)\",\n                \"isActive\": true,\n                \"createdAt\": \"2025-07-16T00:11:00.280Z\",\n                \"updatedAt\": \"2025-07-16T00:11:00.280Z\"\n            },\n            {\n                \"id\": 5,\n                \"name\": \"Masquerade (green) (3 per pack)\",\n                \"isActive\": true,\n                \"createdAt\": \"2025-07-16T00:11:00.280Z\",\n                \"updatedAt\": \"2025-07-16T00:11:00.280Z\"\n            }\n        ],\n        \"page\": 1,\n        \"limit\": 10,\n        \"total\": 5\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Purchase Masks",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"userId\": 1,\n  \"items\": [\n    { \"pharmacyId\": 1, \"maskId\": 5, \"quantity\": 3 },\n    { \"pharmacyId\": 3, \"maskId\": 8, \"quantity\": 1 }\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/masks/purchase",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"masks",
+								"purchase"
+							]
+						},
+						"description": "## 購買口罩流程\n\n### Endpoint\n\n`POST /masks/purchase`\n\n### 描述\n\n購買口罩流程\n\n### Query 參數\n\n| 參數名稱 | 型別 | 範例 | 是否必填 | 描述 |\n| --- | --- | --- | --- | --- |\n| `userId` | number | `1` | 是 | 使用者 ID |\n| `items` | array |  | 是 | 購買項目清單，每筆為一種口罩 |\n| `items.pharmacyId` | number | `10` | 是 | 購買口罩所屬藥局的 ID |\n| `items.maskId` | number | `1` | 是 | 口罩 ID|\n| `items.quantity` | number | `1` | 是 | 購買數量（需為正整數） |"
+					},
+					"response": [
+						{
+							"name": "success response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"userId\": 1,\n  \"items\": [\n    { \"pharmacyId\": 1, \"maskId\": 5, \"quantity\": 3 },\n    { \"pharmacyId\": 3, \"maskId\": 8, \"quantity\": 1 }\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}/masks/purchase",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"masks",
+										"purchase"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "76"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4c-IvDt20Cj80oAStMKEP57/zXWp84\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 18 Jul 2025 06:17:38 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"success\",\n    \"message\": \"OK\",\n    \"data\": {\n        \"success\": true,\n        \"totalRecords\": 2\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Check API Health",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{local}}/health",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"health"
+					]
+				},
+				"description": "This API checks whether the server is up and running. It is typically used for health monitoring or readiness probes.\n\n### **Method**\n\n`GET`\n\n### **Endpoint**\n\n`/health`"
+			},
+			"response": [
+				{
+					"name": "success  response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/health",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"health"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "65"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"41-0gnJ0mECzfPf/m9dQf7sBGFP13I\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 17 Jul 2025 13:06:07 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"OK\",\n    \"data\": {\n        \"msg\": \"Success Run.\"\n    }\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "local",
+			"value": "http://localhost:3000",
+			"type": "string"
+		}
+	]
+}
