@@ -19,7 +19,7 @@
 ### A.2. API Document
 > Please describe how to use the API in the API documentation.([postman](https://www.postman.com/side-project-2577/workspace/public-side-project/collection/25585578-cc971561-0f7a-4dea-927b-9a06ccb83cfd?action=share&creator=25585578).)
 
-Import [this]((https://github.com/KE-CY/phantom_mask/blob/develop/phantom_mask.postman_collection.json)) json file to Postman.
+Import [this](https://github.com/KE-CY/phantom_mask/blob/develop/phantom_mask.postman_collection.json) json file to Postman.
 
 ### A.3. Import Data Commands
 Please run these two script commands to migrate the data into the database.
