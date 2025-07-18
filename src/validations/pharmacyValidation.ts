@@ -18,8 +18,18 @@ export class PharmacyValidationSchema {
   static readonly maskFilterSchema = Joi.object({
     maskCount: Joi.number().min(0).required(),
     maskComparison: Joi.string().valid('gt', 'lt').required(),
-    priceComparison: Joi.string().valid('gt', 'lt', 'between'),
-    minPrice: Joi.number().min(0),
-    maxPrice: Joi.number().min(0),
+    priceComparison: Joi.string().valid('gt', 'lt', 'between').required(),
+    minPrice: Joi.number().min(0)
+      .when('priceComparison', {
+        is: Joi.string().valid('gt', 'between'),
+        then: Joi.required(),
+        otherwise: Joi.forbidden()
+      }),
+    maxPrice: Joi.number().min(0)
+      .when('priceComparison', {
+        is: Joi.string().valid('lt', 'between'),
+        then: Joi.required(),
+        otherwise: Joi.forbidden()
+      })
   }).options({ stripUnknown: true });
 }
